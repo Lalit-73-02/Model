@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Fashion</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables */
+        :root {
+            --bg-color: #0a0a0a;
+            --gold: #C9A84C;
+            --white: #ffffff;
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--white);
+            font-family: var(--font-body);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Nav Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 30; /* Updated per instructions to appear above model */
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            padding: 0 5%;
+            z-index: 10;
+        }
+
+        /* Hero Left Content */
+        .hero-left {
+            position: relative;
+            z-index: 20;
+            max-width: 45%;
+        }
+
+        .hero-left h1 {
+            font-family: var(--font-head);
+            font-size: 5.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-left h1 .line-1 {
+            color: var(--white);
+            font-style: normal;
+            display: block;
+        }
+
+        .hero-left h1 .line-2 {
+            color: var(--gold);
+            font-style: italic;
+            display: block;
+        }
+
+        .hero-left p {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #dddddd;
+            max-width: 450px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--white);
+            color: var(--bg-color);
+        }
+
+        /* Hero Right Model */
+        .model-wrap {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 55%;
+            height: 100%;
+            background: #0a0a0a;  /* BLACK background - this kills checkerboard */
+            z-index: 4;
+            overflow: hidden;
+        }
+
+        .model-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: right center;
+            display: block;
+            background: #0a0a0a;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <!-- Canvas for Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo"><i class="fas fa-tshirt"></i> FASHION LOGO</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" class="active">Careers</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </header>
+
+    <!-- Main Hero Section -->
+    <main class="hero">
+        
+        <!-- Left Content -->
+        <div class="hero-left">
+            <h1>
+                <span class="line-1">ELEVATE</span>
+                <span class="line-2">YOUR STYLE</span>
+            </h1>
+            <p>Discover the latest collections with our new interactive showcase. Experience fashion like never before.</p>
+            <a href="#" class="btn">EXPLORE NOW &rarr;</a>
+        </div>
+        
+        <!-- Right Image Container -->
+        <div class="model-wrap">
+            <img src="assets/19a32cbbec7f85c3a9f03795b22855c9.png" alt="Fashion Model">
+            
+            <!-- Left fade overlay on model -->
+            <div style="
+                position:absolute;
+                top:0; left:0;
+                width:25%;
+                height:100%;
+                background: linear-gradient(to right, #0a0a0a, transparent);
+                z-index:5;
+                pointer-events:none;
+            "></div>
+        </div>
+        
+    </main>
+
+    <!-- Particle Script & Custom Canvas Model -->
+    <script>
+        // -----------------------
+        // Particle Script
+        // -----------------------
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        const goldVariations = [
+            'rgba(201, 168, 76, ', 
+            'rgba(255, 215, 0, ',  
+            'rgba(218, 165, 32, '  
+        ];
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            
+            const particleCount = Math.floor(Math.random() * 50) + 150; 
+            
+            for(let i = 0; i < particleCount; i++) {
+                const colorSet = goldVariations[Math.floor(Math.random() * goldVariations.length)];
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 2 + 1,
+                    dx: (Math.random() - 0.5) * 0.3,
+                    dy: (Math.random() * -1.5) - 0.5,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    color: colorSet
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(p => {
+                p.y += p.dy;
+                p.x += p.dx;
+                
+                if (p.y < -10) {
+                    p.y = height + 10;
+                    p.x = Math.random() * width;
+                }
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + p.opacity + ')';
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            init();
+        });
+        
+        init();
+        animate();
+    </script>
+</body>
+</html>
